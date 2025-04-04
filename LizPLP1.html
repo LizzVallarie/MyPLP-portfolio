@@ -50,17 +50,32 @@
         .top-name h1 {
             font-size: 2rem;
             font-weight: 700;
-            color: #E5E5E5;
+            background: linear-gradient(90deg, #00F5D4, #FF8500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             animation: zoomColor 3s infinite ease-in-out;
             text-shadow: 0 0 10px rgba(0, 245, 212, 0.8);
         }
+        .top-name::after {
+            content: '🏆';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 1.5rem;
+            animation: trophySpin 2s infinite linear;
+        }
+        @keyframes trophySpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         @keyframes zoomColor {
-            0% { transform: scale(1); color: #00F5D4; }
-            50% { transform: scale(1.2); color: #FF8500; }
-            100% { transform: scale(1); color: #00F5D4; }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
 
-        /* Adjusted Header */
+        /* Header */
         header {
             position: relative;
             height: calc(100vh - 60px);
@@ -152,19 +167,8 @@
             color: #E5E5E5; 
             transform: scale(1.1); 
         }
-        .cartoon-hand { 
-            position: absolute; 
-            bottom: 10px; 
-            right: 10px; 
-            height: 60px; 
-            animation: wave 2s infinite ease-in-out;
-        }
-        @keyframes wave {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(15deg); }
-        }
 
-        /* Enhanced Controls */
+        /* Controls */
         .controls {
             position: absolute;
             bottom: 15px;
@@ -189,7 +193,7 @@
             box-shadow: 0 0 10px #FF8500;
         }
 
-        /* Circular Navigation */
+        /* Navigation */
         nav {
             position: fixed;
             bottom: 10px;
@@ -224,6 +228,7 @@
         nav a:nth-child(5) { --i: 5; }
         nav a:nth-child(6) { --i: 6; }
         nav a:nth-child(7) { --i: 7; }
+        nav a:nth-child(8) { --i: 8; }
         @keyframes bounceInNav {
             0% { opacity: 0; transform: scale(0); }
             60% { transform: scale(1.2); }
@@ -236,13 +241,20 @@
             box-shadow: 0 8px 25px rgba(255, 133, 0, 0.6); 
         }
 
-        /* Enhanced Sections */
+        /* Sections */
         section {
             padding: 60px 20px;
             background: #E5E5E5;
             position: relative;
             border-bottom: 3px solid #3C096C;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: sectionFadeIn 0.8s ease forwards;
+            animation-delay: calc(0.1s * var(--section-index));
+        }
+        @keyframes sectionFadeIn {
+            to { opacity: 1; transform: translateY(0); }
         }
         section::after {
             content: '';
@@ -269,7 +281,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 0 0 10px rgba(60, 9, 108, 0.5);
-            position: relative;
         }
         h2 i { 
             color: #FF8500; 
@@ -298,15 +309,11 @@
             animation-delay: calc(0.2s * var(--i)); 
             border: 1px solid #00F5D4;
         }
-        #skills .content-grid > div:hover,
-        #interests .content-grid > div:hover,
-        #portfolio .content-grid > div:hover,
-        #experience .content-grid > div:hover,
-        #projects .content-grid > div:hover { 
+        .content-grid > div:hover { 
             transform: scale(1.05); 
             box-shadow: 0 15px 40px rgba(255, 133, 0, 0.5); 
         }
-        .skills-img, .tech-cartoon { 
+        .tech-cartoon { 
             width: 100%; 
             max-width: 300px; 
             border-radius: 10px; 
@@ -316,14 +323,8 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         .tech-cartoon:hover { transform: scale(1.1); }
-        .icon { 
-            width: 30px; 
-            height: 30px; 
-            vertical-align: middle; 
-            margin-right: 10px; 
-        }
 
-        /* Enhanced Progress Bars */
+        /* Progress Bars */
         .progress-bar { 
             width: 100%; 
             background: #E5E5E5; 
@@ -341,8 +342,12 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 245, 212, 0.8);
         }
+        .progress-bar:hover .progress {
+            transform: scaleX(1.05);
+            transition: transform 0.3s ease, width 1.5s ease;
+        }
 
-        /* Enhanced Contact Form */
+        /* Contact Form */
         #contact form { 
             max-width: 100%; 
             margin: 0 auto; 
@@ -381,43 +386,27 @@
             transform: scale(1.05); 
             box-shadow: 0 8px 20px rgba(255, 133, 0, 0.6); 
         }
-        #contact .resume-link { 
-            display: inline-block; 
-            margin-top: 20px; 
-            padding: 10px 20px; 
-            background: #00F5D4; 
-            color: #3C096C; 
-            text-decoration: none; 
-            border-radius: 10px; 
-            font-weight: 500; 
-            transition: all 0.3s ease; 
-            box-shadow: 0 5px 15px rgba(0, 245, 212, 0.5);
-            position: relative;
-            overflow: hidden;
+        .download-btn {
+            display: inline-block;
+            padding: 18px 35px;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            background-color: #0056b3;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
         }
-        #contact .resume-link::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 133, 0, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-        #contact .resume-link:hover::after {
-            width: 200%;
-            height: 200%;
-        }
-        #contact .resume-link:hover { 
-            background: #FF8500; 
-            color: #E5E5E5; 
-            transform: scale(1.05); 
+        .download-btn:hover {
+            background-color: #003d80;
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
         }
 
-        /* Enhanced Footer */
+        /* Footer */
         footer { 
             background: linear-gradient(135deg, #3C096C, #1A0536); 
             color: #E5E5E5; 
@@ -429,8 +418,9 @@
             box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
             position: relative;
         }
+        footer p:nth-child(2) { font-style: italic; color: #00F5D4; margin-top: 10px; }
         footer::before {
-            content: '🏆 National Competition Winner';
+            content: '🏆 Born A Winner';
             position: absolute;
             top: -20px;
             left: 50%;
@@ -449,92 +439,66 @@
             50% { transform: translateX(-50%) translateY(-10px); }
         }
 
-        /* Phone-Size Responsive Design */
+        /* Responsiveness */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .top-name h1 { font-size: 1.5rem; }
+            .slide-content h1 { font-size: 1.8rem; }
+            .slide-content p { font-size: 1rem; }
+            nav a { width: 38px; height: 38px; font-size: 1.1rem; }
+            section { padding: 50px 20px; }
+            h2 { font-size: 1.8rem; }
+            .content-grid > div { padding: 18px; }
+            .tech-cartoon { max-width: 250px; }
+        }
+
         @media (max-width: 480px) {
             .top-name { padding: 10px 0; }
-            .top-name h1 { font-size: 1.2rem; }
-
-            header { 
-                height: calc(100vh - 50px); 
-                margin-top: 50px; 
+            .top-name h1 { 
+                font-size: 1rem; 
+                white-space: nowrap; 
+                overflow: hidden; 
+                text-overflow: ellipsis; 
             }
-            .slide-content { 
-                padding: 15px; 
-                max-width: 95%; 
-            }
+            header { height: calc(100vh - 50px); margin-top: 50px; }
+            .slide { background-size: contain; background-repeat: no-repeat; }
+            .slide-content { padding: 15px; max-width: 95%; }
             .slide-content h1 { font-size: 1.5rem; }
             .slide-content p { font-size: 0.9rem; }
-            .slide-content a { 
-                padding: 6px 12px; 
-                font-size: 0.8rem; 
-            }
-            .cartoon-hand { height: 40px; }
-            .controls { gap: 8px; }
+            .slide-content a { padding: 6px 12px; font-size: 0.8rem; }
+            .controls { gap: 8px; bottom: 10px; }
             .control-btn { width: 12px; height: 12px; }
-
-            nav { 
-                bottom: 5px; 
-                right: 5px; 
-                gap: 8px; 
-            }
-            nav a { 
-                width: 35px; 
-                height: 35px; 
-                font-size: 1rem; 
-            }
-
+            nav { bottom: 10px; right: 10px; gap: 8px; }
+            nav a { width: 30px; height: 30px; font-size: 0.9rem; }
             section { padding: 40px 15px; }
             h2 { font-size: 1.5rem; margin-bottom: 15px; }
             h2 i { font-size: 1.2rem; }
-            .content-grid { 
-                grid-template-columns: 1fr; 
-                gap: 15px; 
-            }
-            .content-grid > div { 
-                padding: 15px; 
-                border-radius: 10px; 
-            }
-            #skills .content-grid > div:hover,
-            #interests .content-grid > div:hover,
-            #portfolio .content-grid > div:hover,
-            #experience .content-grid > div:hover,
-            #projects .content-grid > div:hover { 
-                transform: scale(1.02); 
-                box-shadow: 0 8px 20px rgba(255, 133, 0, 0.4); 
-            }
+            .content-grid { grid-template-columns: 1fr; gap: 15px; }
+            .content-grid > div { padding: 15px; }
+            .content-grid > div:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(255, 133, 0, 0.4); }
             .tech-cartoon { max-width: 200px; }
             .progress-bar { height: 8px; margin-top: 8px; }
-
             #contact form { gap: 10px; }
-            #contact input, #contact textarea { 
-                padding: 10px; 
-                font-size: 0.9rem; 
-            }
-            #contact button { 
-                padding: 10px; 
-                font-size: 0.9rem; 
-            }
-            #contact .resume-link { 
-                padding: 8px 15px; 
-                font-size: 0.9rem; 
-            }
+            #contact input, #contact textarea { padding: 10px; font-size: 0.9rem; }
+            #contact button { padding: 10px; font-size: 0.9rem; }
+            .download-btn { padding: 12px 25px; font-size: 1rem; }
+            footer { padding: 15px; font-size: 0.8rem; }
+            footer::before { font-size: 0.7rem; padding: 3px 10px; top: -15px; }
+        }
 
-            footer { 
-                padding: 15px; 
-                font-size: 0.8rem; 
-            }
-            footer::before { 
-                font-size: 0.7rem; 
-                padding: 3px 10px; 
-                top: -15px; 
-            }
+        @media (max-width: 320px) {
+            .slide-content { padding: 10px; }
+            .slide-content h1 { font-size: 1.2rem; }
+            .slide-content p { font-size: 0.8rem; }
+            .controls { bottom: 5px; }
+            .control-btn { width: 10px; height: 10px; }
+            nav a { width: 28px; height: 28px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
     <!-- Top Name -->
     <div class="top-name">
-        <h1>Hello, I am Vallarie Wakhula Data Analyst And Machine Learner</h1>
+        <h1>Hello, I am Vallarie Wakhula - Data Analyst & Machine Learner</h1>
     </div>
 
     <!-- Slideshow Header -->
@@ -571,22 +535,22 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="#about"><i class="fa-solid fa-user-astronaut"></i></a>
-        <a href="#skills"><i class="fa-solid fa-gears"></i></a>
-        <a href="#interests"><i class="fa-solid fa-star"></i></a>
-        <a href="#portfolio"><i class="fa-solid fa-rocket"></i></a>
-        <a href="#experience"><i class="fa-solid fa-briefcase"></i></a>
-        <a href="#projects"><i class="fa-solid fa-code"></i></a>
-        <a href="#education"><i class="fa-solid fa-graduation-cap"></i></a>
-        <a href="#contact"><i class="fa-solid fa-envelope"></i></a>
+        <a href="#about" aria-label="About Me"><i class="fa-solid fa-user-astronaut"></i></a>
+        <a href="#skills" aria-label="Skills"><i class="fa-solid fa-gears"></i></a>
+        <a href="#interests" aria-label="Interests"><i class="fa-solid fa-star"></i></a>
+        <a href="#portfolio" aria-label="Portfolio"><i class="fa-solid fa-rocket"></i></a>
+        <a href="#experience" aria-label="Experience"><i class="fa-solid fa-briefcase"></i></a>
+        <a href="#projects" aria-label="Projects"><i class="fa-solid fa-code"></i></a>
+        <a href="#education" aria-label="Education"><i class="fa-solid fa-graduation-cap"></i></a>
+        <a href="#contact" aria-label="Contact"><i class="fa-solid fa-envelope"></i></a>
     </nav>
 
     <!-- About -->
-    <section id="about">
+    <section id="about" style="--section-index: 1;">
         <h2><i class="fa-solid fa-user-astronaut"></i> About Me</h2>
         <div class="content-grid">
             <div style="--i: 1;">
-                <p style="font-size: 1.2em; font-weight: bold; animation: blingColors 2s infinite alternate;">
+                <p style="font-size: 1.6em; font-weight: bold; animation: blingColors 2s infinite alternate;">
                     I'm a passionate data analyst and machine learning expert focused on turning data into actionable insights.
                 </p>
                 <style>
@@ -603,33 +567,21 @@
     </section>
 
     <!-- Skills -->
-    <section id="skills">
+    <section id="skills" style="--section-index: 2;">
         <h2><i class="fa-solid fa-gears"></i> Skills</h2>
-        <img src="images/Skills.gif" alt="Tech Space Cartoon" class="tech-cartoon">
+        <img src="images/Skills.gif" alt="Tech Space Cartoon" class="tech-cartoon" loading="lazy">
         <div class="content-grid">
-            <div style="--i: 1;">
-                <h3>Data Analytics</h3>
-                <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
-            </div>
-            <div style="--i: 2;">
-                <h3>Machine Learning</h3>
-                <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
-            </div>
-            <div style="--i: 3;">
-                <h3>Data Visualization</h3>
-                <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
-            </div>
-            <div style="--i: 4;">
-                <h3>Python Programming</h3>
-                <div class="progress-bar"><div class="progress" style="width: 88%;"></div></div>
-            </div>
+            <div style="--i: 1;"><h3>Data Analytics</h3><div class="progress-bar"><div class="progress" style="width: 90%;"></div></div></div>
+            <div style="--i: 2;"><h3>Machine Learning</h3><div class="progress-bar"><div class="progress" style="width: 85%;"></div></div></div>
+            <div style="--i: 3;"><h3>Data Visualization</h3><div class="progress-bar"><div class="progress" style="width: 80%;"></div></div></div>
+            <div style="--i: 4;"><h3>Python Programming</h3><div class="progress-bar"><div class="progress" style="width: 88%;"></div></div></div>
         </div>
     </section>
 
     <!-- Interests -->
-    <section id="interests">
+    <section id="interests" style="--section-index: 3;">
         <h2><i class="fa-solid fa-star"></i> Interests</h2>
-        <img src="images/Interest.gif" alt="Interests Cartoon" class="tech-cartoon">
+        <img src="images/Interest.gif" alt="Interests Cartoon" class="tech-cartoon" loading="lazy">
         <div class="content-grid">
             <div style="--i: 1;"><p>Data Analytics</p></div>
             <div style="--i: 2;"><p>Machine Learning</p></div>
@@ -641,41 +593,23 @@
     </section>
 
     <!-- Portfolio -->
-    <section id="portfolio">
+    <section id="portfolio" style="--section-index: 4;">
         <h2><i class="fa-solid fa-rocket"></i> Portfolio</h2>
-        <img src="images/Portfolio (3).gif" alt="Portfolio Cartoon" class="tech-cartoon">
+        <img src="images/Portfolio (3).gif" alt="Portfolio Cartoon" class="tech-cartoon" loading="lazy">
         <div class="content-grid">
-            <div style="--i: 1;">
-                <h3>Data Analytics</h3>
-                <p>Extracted insights from large datasets using statistical methods.</p>
-            </div>
-            <div style="--i: 2;">
-                <h3>Web Development</h3>
-                <p>Built responsive websites with HTML, CSS, and JavaScript.</p>
-            </div>
-            <div style="--i: 3;">
-                <h3>Data Analytics</h3>
-                <p>Processed data using IBM Watson and SPSS.</p>
-            </div>
-            <div style="--i: 4;">
-                <h3>Data Analytics</h3>
-                <p>Analyzed network performance metrics.</p>
-            </div>
-            <div style="--i: 5;">
-                <h3>Machine Learning</h3>
-                <p>Developed a predictive model for customer churn.</p>
-            </div>
-            <div style="--i: 6;">
-                <h3>Data Visualization</h3>
-                <p>Created interactive dashboards with Power BI.</p>
-            </div>
+            <div style="--i: 1;"><h3>Data Analytics</h3><p>Extracted insights from large datasets using statistical methods.</p></div>
+            <div style="--i: 2;"><h3>Web Development</h3><p>Built responsive websites with HTML, CSS, and JavaScript.</p></div>
+            <div style="--i: 3;"><h3>Data Analytics</h3><p>Processed data using IBM Watson and SPSS.</p></div>
+            <div style="--i: 4;"><h3>Data Analytics</h3><p>Analyzed network performance metrics.</p></div>
+            <div style="--i: 5;"><h3>Machine Learning</h3><p>Developed a predictive model for customer churn.</p></div>
+            <div style="--i: 6;"><h3>Data Visualization</h3><p>Created interactive dashboards with Power BI.</p></div>
         </div>
     </section>
 
     <!-- Experience -->
-    <section id="experience">
+    <section id="experience" style="--section-index: 5;">
         <h2><i class="fa-solid fa-briefcase"></i> Experience</h2>
-        <img src="images/Experience.gif" alt="Experience Cartoon" class="tech-cartoon">
+        <img src="images/Experience.gif" alt="Experience Cartoon" class="tech-cartoon" loading="lazy">
         <div class="content-grid">
             <div style="--i: 1;"><p>Data Cleaning: Preprocessed raw datasets for analysis.</p></div>
             <div style="--i: 2;"><p>Data Visualization: Created dashboards with Tableau.</p></div>
@@ -687,129 +621,57 @@
     </section>
 
     <!-- Projects -->
-    <section id="projects">
+    <section id="projects" style="--section-index: 6;">
         <h2><i class="fa-solid fa-code"></i> Projects</h2>
-        <img src="images/Projects.gif" alt="Projects Cartoon" class="tech-cartoon">
+        <img src="images/Projects.gif" alt="Projects Cartoon" class="tech-cartoon" loading="lazy">
         <div class="content-grid">
-            <div style="--i: 1;">
-                <p>Analytical Project: Used Python and SQL to analyze sales data.</p>
-            </div>
-            <div style="--i: 2;">
-                <p>ML Training Project: Trained a regression model for predictions.</p>
-            </div>
-            <div style="--i: 3;">
-                <p>ML Feeding Project: Optimized data pipelines for ML models.</p>
-            </div>
-            <div style="--i: 4;">
-                <p>Data Analytics Project: Built an interactive dashboard with real-time data.</p>
-            </div>
-            <div style="--i: 5;">
-                <p>AI Chatbot: Developed a conversational AI using NLP techniques.</p>
-            </div>
-            <div style="--i: 6;">
-                <p>Image Recognition: Built a CNN model for object detection.</p>
-            </div>
+            <div style="--i: 1;"><p>Analytical Project: Used Python and SQL to analyze sales data.</p></div>
+            <div style="--i: 2;"><p>ML Training Project: Trained a regression model for predictions.</p></div>
+            <div style="--i: 3;"><p>ML Feeding Project: Optimized data pipelines for ML models.</p></div>
+            <div style="--i: 4;"><p>Data Analytics Project: Built an interactive dashboard with real-time data.</p></div>
+            <div style="--i: 5;"><p>AI Chatbot: Developed a conversational AI using NLP techniques.</p></div>
+            <div style="--i: 6;"><p>Image Recognition: Built a CNN model for object detection.</p></div>
         </div>
     </section>
 
     <!-- Education -->
-    <section id="education">
+    <section id="education" style="--section-index: 7;">
         <h2><i class="fa-solid fa-graduation-cap"></i> Education</h2>
-        <img src="images/Education.gif" alt="Education Cartoon" class="tech-cartoon">
+        <img src="images/Education.gif" alt="Education Cartoon" class="tech-cartoon" loading="lazy">
         <div class="content-grid">
-            
-            <style>
-                @keyframes bounce {
-                  0%, 100% { transform: translateY(0); }
-                  50% { transform: translateY(-5px); }
-                }
-              
-                @keyframes bling {
-                  0% {
-                    text-shadow: 0 0 5px #32e136, 0 0 10px #32e136, 0 0 15px #32e136, 0 0 20px #32e136, 0 0 25px #32e136;
-                  }
-                  100% {
-                    text-shadow: 0 0 20px #32e136, 0 0 30px #32e136, 0 0 40px #32e136, 0 0 50px #32e136, 0 0 60px #32e136;
-                  }
-                }
-              
-                .education-container {
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  justify-content: center;
-                  
-                  font-family: 'Poppins', sans-serif;
-                  font-weight: bold;
-                  text-transform: uppercase;
-                  color: #2c3e50;
-                }
-              
-                .education-text {
-                  font-size: 20px;  /* Changed font size to 12px */
-                  text-align: center;
-                  position: relative;
-                  color: #32e136;  /* Luminous green color */
-                  animation: bling 1s infinite alternate;
-                }
-              
-                .education-icon {
-                  width: 20px;  /* Adjusted to make it very small */
-                  height: auto;
-                  animation: bounce 1.5s infinite;
-                  margin-bottom: 10px;
-                }
-              </style>
-              
-              <div class="education-container">
-                  <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Education Icon" class="education-icon">
-                  <p class="education-text">Meru University of Science and Technology</p>
-              </div>
-              
-              
+            <div style="--i: 1;">
+                <style>
+                    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+                    @keyframes bling { 0% { text-shadow: 0 0 5px #FF8500, 0 0 10px #32e136; } 100% { text-shadow: 0 0 20px #32e136, 0 0 30px #32e136; } }
+                    .education-container { display: flex; flex-direction: column; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: bold; text-transform: uppercase; color: #2c3e50; }
+                    .education-text { font-size: 1.5rem; text-align: center; color: #1216eb; animation: bling 1s infinite alternate; }
+                    .education-icon { width: 20px; height: auto; animation: bounce 1.5s infinite; margin-bottom: 10px; }
+                </style>
+                <div class="education-container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Education Icon" class="education-icon">
+                    <p class="education-text">Meru University of Science and Technology</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact">
+    <section id="contact" style="--section-index: 8;">
         <h2><i class="fa-solid fa-envelope"></i> Contact Me</h2>
-        <img src="images/contact1.gif" alt="Contact Cartoon" class="tech-cartoon">
+        <img src="images/contact1.gif" alt="Contact Cartoon" class="tech-cartoon" loading="lazy">
         <form id="contact-form">
             <input type="text" id="name" placeholder="Your Name" required>
             <input type="email" id="email" placeholder="Your Email" required>
             <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
             <button type="submit">Send Message</button>
         </form>
-        <<a href="https://drive.google.com/uc?export=download&id=1RftdwAuUzYzIOyxyt3CYbF07DsCDOqTa" class="download-btn" download>📄 Download Resume</a>
-
-        <style>
-            .download-btn {
-                display: inline-block;
-                padding: 18px 35px;
-                font-size: 22px;
-                font-weight: bold;
-                color: white;
-                background-color: #0056b3;
-                border-radius: 10px;
-                text-align: center;
-                text-decoration: none;
-                transition: all 0.3s ease-in-out;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-            }
-        
-            .download-btn:hover {
-                background-color: #003d80;
-                transform: scale(1.1);
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-            }
-        </style>
-        
-
+        <a href="https://drive.google.com/uc?export=download&id=1RftdwAuUzYzIOyxyt3CYbF07DsCDOqTa" class="download-btn" download>📄 Download Resume</a>
     </section>
 
     <!-- Footer -->
     <footer>
         <p>© 2025 Vallarie Wakhula. Powered by Innovation.</p>
+        <p>"Data is my canvas, and innovation is my brush."</p>
     </footer>
 
     <!-- JavaScript -->
