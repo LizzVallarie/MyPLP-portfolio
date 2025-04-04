@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vallarie Wakhula - Data & ML Innovator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { 
+            background: #E5E5E5; 
+            color: #3C096C; 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+            position: relative;
+        }
+
+        /* Background Particle Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.1;
+            z-index: -1;
+            animation: subtleMove 20s infinite linear;
+        }
+        @keyframes subtleMove {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Top Name Animation */
+        .top-name {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(60, 9, 108, 0.95);
+            text-align: center;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        .top-name h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00F5D4, #FF8500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: zoomColor 3s infinite ease-in-out;
+            text-shadow: 0 0 10px rgba(0, 245, 212, 0.8);
+        }
+        .top-name::after {
+            content: '🏆';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 1.5rem;
+            animation: trophySpin 2s infinite linear;
+        }
+        @keyframes trophySpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes zoomColor {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            height: calc(100vh - 60px);
+            margin-top: 60px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #3C096C 0%, #1A0536 100%);
+        }
+        .slideshow {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.8s ease;
+        }
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            opacity: 0;
+            animation: fadeInSlide 1s ease forwards;
+        }
+        .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1620121478247-ec408b91b680?q=80&w=2070&auto=format&fit=crop'); }
+        .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1526374965328-50dd35795525?q=80&w=2070&auto=format&fit=crop'); }
+        .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop'); }
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .slide-content {
+            text-align: center;
+            color: #E5E5E5;
+            padding: 20px;
+            background: rgba(60, 9, 108, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 90%;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #00F5D4;
+        }
+        .slide-content:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 15px 40px rgba(0, 245, 212, 0.5); 
+        }
+        .slide-content h1 { 
+            font-size: 2rem; 
+            font-weight: 700; 
+            margin-bottom: 15px; 
+            animation: bounceIn 1s ease; 
+            text-shadow: 0 0 5px #FF8500;
+        }
+        .slide-content p { 
+            font-size: 1rem; 
+            font-weight: 300; 
+            color: #FF8500; 
+            animation: fadeInUp 1s ease 0.5s forwards; 
+            opacity: 0; 
+        }
+        .slide-content a { 
+            display: inline-block; 
+            margin-top: 15px; 
+            padding: 8px 15px; 
+            background: #00F5D4; 
+            color: #3C096C; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            transition: all 0.3s ease; 
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0, 245, 212, 0.5);
+        }
+        .slide-content a:hover { 
+            background: #FF8500; 
+            color: #E5E5E5; 
+            transform: scale(1.1); 
+        }
+
+        /* Controls */
+        .controls {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        .control-btn {
+            width: 15px;
+            height: 15px;
+            background: #E5E5E5;
+            border-radius: 50%;
+            border: 2px solid #FF8500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .control-btn.active { 
+            background: #FF8500; 
+            transform: scale(1.3); 
+            box-shadow: 0 0 10px #FF8500;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+        nav a {
+            width: 40px;
+            height: 40px;
+            background: #3C096C;
+            color: #00F5D4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: bounceInNav 0.5s ease forwards;
+            animation-delay: calc(0.1s * var(--i));
+            border: 1px solid #00F5D4;
+        }
+        nav a:nth-child(1) { --i: 1; }
+        nav a:nth-child(2) { --i: 2; }
+        nav a:nth-child(3) { --i: 3; }
+        nav a:nth-child(4) { --i: 4; }
+        nav a:nth-child(5) { --i: 5; }
+        nav a:nth-child(6) { --i: 6; }
+        nav a:nth-child(7) { --i: 7; }
+        nav a:nth-child(8) { --i: 8; }
+        @keyframes bounceInNav {
+            0% { opacity: 0; transform: scale(0); }
+            60% { transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        nav a:hover { 
+            background: #FF8500; 
+            color: #3C096C; 
+            transform: scale(1.2); 
+            box-shadow: 0 8px 25px rgba(255, 133, 0, 0.6); 
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 20px;
+            background: #E5E5E5;
+            position: relative;
+            border-bottom: 3px solid #3C096C;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: sectionFadeIn 0.8s ease forwards;
+            animation-delay: calc(0.1s * var(--section-index));
+        }
+        @keyframes sectionFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 245, 212, 0.1) 0%, transparent 70%);
+            animation: pulse 10s infinite ease-in-out;
+            z-index: -1;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        h2 { 
+            font-size: 2rem; 
+            font-weight: 700; 
+            color: #3C096C; 
+            margin-bottom: 20px; 
+            text-align: center; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(60, 9, 108, 0.5);
+        }
+        h2 i { 
+            color: #FF8500; 
+            margin-right: 10px; 
+            animation: spin 2s infinite linear;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
+            opacity: 0; 
+            animation: staggerFadeIn 1s ease forwards; 
+        }
+        @keyframes staggerFadeIn {
+            to { opacity: 1; }
+        }
+        .content-grid > div { 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            animation-delay: calc(0.2s * var(--i)); 
+            border: 1px solid #00F5D4;
+        }
+        .content-grid > div:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 15px 40px rgba(255, 133, 0, 0.5); 
+        }
+        .tech-cartoon { 
+            width: 100%; 
+            max-width: 300px; 
+            border-radius: 10px; 
+            margin: 15px auto; 
+            display: block;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .tech-cartoon:hover { transform: scale(1.1); }
+
+        /* Progress Bars */
+        .progress-bar { 
+            width: 100%; 
+            background: #E5E5E5; 
+            height: 10px; 
+            border-radius: 5px; 
+            margin-top: 10px; 
+            overflow: hidden; 
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .progress { 
+            height: 100%; 
+            background: linear-gradient(90deg, #00F5D4, #FF8500); 
+            width: 0; 
+            transition: width 1.5s ease; 
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.8);
+        }
+        .progress-bar:hover .progress {
+            transform: scaleX(1.05);
+            transition: transform 0.3s ease, width 1.5s ease;
+        }
+
+        /* Contact Form */
+        #contact form { 
+            max-width: 100%; 
+            margin: 0 auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+        #contact input, #contact textarea { 
+            padding: 12px; 
+            border: 2px solid #3C096C; 
+            border-radius: 10px; 
+            font-size: 1rem; 
+            background: #fff; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        #contact input:focus, #contact textarea:focus { 
+            border-color: #FF8500; 
+            box-shadow: 0 0 12px rgba(255, 133, 0, 0.6); 
+            outline: none; 
+        }
+        #contact button { 
+            padding: 12px; 
+            background: #3C096C; 
+            color: #E5E5E5; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 1rem; 
+            font-weight: 500; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 5px 15px rgba(60, 9, 108, 0.5);
+        }
+        #contact button:hover { 
+            background: #FF8500; 
+            transform: scale(1.05); 
+            box-shadow: 0 8px 20px rgba(255, 133, 0, 0.6); 
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 18px 35px;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            background-color: #0056b3;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+        .download-btn:hover {
+            background-color: #003d80;
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Footer */
+        footer { 
+            background: linear-gradient(135deg, #3C096C, #1A0536); 
+            color: #E5E5E5; 
+            text-align: center; 
+            padding: 20px; 
+            font-size: 0.9rem; 
+            font-weight: 500; 
+            letter-spacing: 1px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        footer p:nth-child(2) { font-style: italic; color: #00F5D4; margin-top: 10px; }
+        footer::before {
+            content: '🏆 Born A Winner';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FF8500;
+            color: #3C096C;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(255, 133, 0, 0.5);
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Responsiveness */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .top-name h1 { font-size: 1.5rem; }
+            .slide-content h1 { font-size: 1.8rem; }
+            .slide-content p { font-size: 1rem; }
+            nav a { width: 38px; height: 38px; font-size: 1.1rem; }
+            section { padding: 50px 20px; }
+            h2 { font-size: 1.8rem; }
+            .content-grid > div { padding: 18px; }
+            .tech-cartoon { max-width: 250px; }
+        }
+
+        @media (max-width: 480px) {
+            .top-name { padding: 10px 0; }
+            .top-name h1 { 
+                font-size: 1rem; 
+                white-space: nowrap; 
+                overflow: hidden; 
+                text-overflow: ellipsis; 
+            }
+            header { height: calc(100vh - 50px); margin-top: 50px; }
+            .slide { background-size: contain; background-repeat: no-repeat; }
+            .slide-content { padding: 15px; max-width: 95%; }
+            .slide-content h1 { font-size: 1.5rem; }
+            .slide-content p { font-size: 0.9rem; }
+            .slide-content a { padding: 6px 12px; font-size: 0.8rem; }
+            .controls { gap: 8px; bottom: 10px; }
+            .control-btn { width: 12px; height: 12px; }
+            nav { bottom: 10px; right: 10px; gap: 8px; }
+            nav a { width: 30px; height: 30px; font-size: 0.9rem; }
+            section { padding: 40px 15px; }
+            h2 { font-size: 1.5rem; margin-bottom: 15px; }
+            h2 i { font-size: 1.2rem; }
+            .content-grid { grid-template-columns: 1fr; gap: 15px; }
+            .content-grid > div { padding: 15px; }
+            .content-grid > div:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(255, 133, 0, 0.4); }
+            .tech-cartoon { max-width: 200px; }
+            .progress-bar { height: 8px; margin-top: 8px; }
+            #contact form { gap: 10px; }
+            #contact input, #contact textarea { padding: 10px; font-size: 0.9rem; }
+            #contact button { padding: 10px; font-size: 0.9rem; }
+            .download-btn { padding: 12px 25px; font-size: 1rem; }
+            footer { padding: 15px; font-size: 0.8rem; }
+            footer::before { font-size: 0.7rem; padding: 3px 10px; top: -15px; }
+        }
+
+        @media (max-width: 320px) {
+            .slide-content { padding: 10px; }
+            .slide-content h1 { font-size: 1.2rem; }
+            .slide-content p { font-size: 0.8rem; }
+            .controls { bottom: 5px; }
+            .control-btn { width: 10px; height: 10px; }
+            nav a { width: 28px; height: 28px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Name -->
+    <div class="top-name">
+        <h1>Hello, I am Vallarie Wakhula - Data Analyst & Machine Learner</h1>
+    </div>
+
+    <!-- Slideshow Header -->
+    <header>
+        <div class="slideshow">
+            <div class="slides">
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1>Welcome</h1>
+                        <p>I'm Vallarie Wakhula, a Data & ML Innovator</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1>Skills</h1>
+                        <p>Expertise in Data Analytics & Machine Learning</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1>Connect</h1>
+                        <p>Let’s collaborate on innovative projects!</p>
+                        <a href="#contact">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="control-btn active" data-slide="0"></button>
+                <button class="control-btn" data-slide="1"></button>
+                <button class="control-btn" data-slide="2"></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#about" aria-label="About Me"><i class="fa-solid fa-user-astronaut"></i></a>
+        <a href="#skills" aria-label="Skills"><i class="fa-solid fa-gears"></i></a>
+        <a href="#interests" aria-label="Interests"><i class="fa-solid fa-star"></i></a>
+        <a href="#portfolio" aria-label="Portfolio"><i class="fa-solid fa-rocket"></i></a>
+        <a href="#experience" aria-label="Experience"><i class="fa-solid fa-briefcase"></i></a>
+        <a href="#projects" aria-label="Projects"><i class="fa-solid fa-code"></i></a>
+        <a href="#education" aria-label="Education"><i class="fa-solid fa-graduation-cap"></i></a>
+        <a href="#contact" aria-label="Contact"><i class="fa-solid fa-envelope"></i></a>
+    </nav>
+
+    <!-- About -->
+    <section id="about" style="--section-index: 1;">
+        <h2><i class="fa-solid fa-user-astronaut"></i> About Me</h2>
+        <div class="content-grid">
+            <div style="--i: 1;">
+                <p style="font-size: 1.6em; font-weight: bold; animation: blingColors 2s infinite alternate;">
+                    I'm a passionate data analyst and machine learning expert focused on turning data into actionable insights.
+                </p>
+                <style>
+                    @keyframes blingColors {
+                        0% { color: gold; text-shadow: 2px 2px 5px #FFD700; }
+                        25% { color: cyan; text-shadow: 2px 2px 5px #00FFFF; }
+                        50% { color: magenta; text-shadow: 2px 2px 5px #FF00FF; }
+                        75% { color: lime; text-shadow: 2px 2px 5px #00FF00; }
+                        100% { color: gold; text-shadow: 2px 2px 5px #FFD700; }
+                    }
+                </style>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" style="--section-index: 2;">
+        <h2><i class="fa-solid fa-gears"></i> Skills</h2>
+        <img src="images/Skills.gif" alt="Tech Space Cartoon" class="tech-cartoon" loading="lazy">
+        <div class="content-grid">
+            <div style="--i: 1;"><h3>Data Analytics</h3><div class="progress-bar"><div class="progress" style="width: 90%;"></div></div></div>
+            <div style="--i: 2;"><h3>Machine Learning</h3><div class="progress-bar"><div class="progress" style="width: 85%;"></div></div></div>
+            <div style="--i: 3;"><h3>Data Visualization</h3><div class="progress-bar"><div class="progress" style="width: 80%;"></div></div></div>
+            <div style="--i: 4;"><h3>Python Programming</h3><div class="progress-bar"><div class="progress" style="width: 88%;"></div></div></div>
+        </div>
+    </section>
+
+    <!-- Interests -->
+    <section id="interests" style="--section-index: 3;">
+        <h2><i class="fa-solid fa-star"></i> Interests</h2>
+        <img src="images/Interest.gif" alt="Interests Cartoon" class="tech-cartoon" loading="lazy">
+        <div class="content-grid">
+            <div style="--i: 1;"><p>Data Analytics</p></div>
+            <div style="--i: 2;"><p>Machine Learning</p></div>
+            <div style="--i: 3;"><p>Data Visualization</p></div>
+            <div style="--i: 4;"><p>Model Training</p></div>
+            <div style="--i: 5;"><p>Artificial Intelligence</p></div>
+            <div style="--i: 6;"><p>Big Data</p></div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" style="--section-index: 4;">
+        <h2><i class="fa-solid fa-rocket"></i> Portfolio</h2>
+        <img src="images/Portfolio (3).gif" alt="Portfolio Cartoon" class="tech-cartoon" loading="lazy">
+        <div class="content-grid">
+            <div style="--i: 1;"><h3>Data Analytics</h3><p>Extracted insights from large datasets using statistical methods.</p></div>
+            <div style="--i: 2;"><h3>Web Development</h3><p>Built responsive websites with HTML, CSS, and JavaScript.</p></div>
+            <div style="--i: 3;"><h3>Data Analytics</h3><p>Processed data using IBM Watson and SPSS.</p></div>
+            <div style="--i: 4;"><h3>Data Analytics</h3><p>Analyzed network performance metrics.</p></div>
+            <div style="--i: 5;"><h3>Machine Learning</h3><p>Developed a predictive model for customer churn.</p></div>
+            <div style="--i: 6;"><h3>Data Visualization</h3><p>Created interactive dashboards with Power BI.</p></div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" style="--section-index: 5;">
+        <h2><i class="fa-solid fa-briefcase"></i> Experience</h2>
+        <img src="images/Experience.gif" alt="Experience Cartoon" class="tech-cartoon" loading="lazy">
+        <div class="content-grid">
+            <div style="--i: 1;"><p>Data Cleaning: Preprocessed raw datasets for analysis.</p></div>
+            <div style="--i: 2;"><p>Data Visualization: Created dashboards with Tableau.</p></div>
+            <div style="--i: 3;"><p>Model Feeding: Prepared data for machine learning models.</p></div>
+            <div style="--i: 4;"><p>Model Training: Trained ML models using Python.</p></div>
+            <div style="--i: 5;"><p>Statistical Analysis: Conducted hypothesis testing with R.</p></div>
+            <div style="--i: 6;"><p>Database Management: Optimized SQL queries for performance.</p></div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" style="--section-index: 6;">
+        <h2><i class="fa-solid fa-code"></i> Projects</h2>
+        <img src="images/Projects.gif" alt="Projects Cartoon" class="tech-cartoon" loading="lazy">
+        <div class="content-grid">
+            <div style="--i: 1;"><p>Analytical Project: Used Python and SQL to analyze sales data.</p></div>
+            <div style="--i: 2;"><p>ML Training Project: Trained a regression model for predictions.</p></div>
+            <div style="--i: 3;"><p>ML Feeding Project: Optimized data pipelines for ML models.</p></div>
+            <div style="--i: 4;"><p>Data Analytics Project: Built an interactive dashboard with real-time data.</p></div>
+            <div style="--i: 5;"><p>AI Chatbot: Developed a conversational AI using NLP techniques.</p></div>
+            <div style="--i: 6;"><p>Image Recognition: Built a CNN model for object detection.</p></div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" style="--section-index: 7;">
+        <h2><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+        <img src="images/Education.gif" alt="Education Cartoon" class="tech-cartoon" loading="lazy">
+        <div class="content-grid">
+            <div style="--i: 1;">
+                <style>
+                    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+                    @keyframes bling { 0% { text-shadow: 0 0 5px #FF8500, 0 0 10px #32e136; } 100% { text-shadow: 0 0 20px #32e136, 0 0 30px #32e136; } }
+                    .education-container { display: flex; flex-direction: column; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: bold; text-transform: uppercase; color: #2c3e50; }
+                    .education-text { font-size: 1.5rem; text-align: center; color: #1216eb; animation: bling 1s infinite alternate; }
+                    .education-icon { width: 20px; height: auto; animation: bounce 1.5s infinite; margin-bottom: 10px; }
+                </style>
+                <div class="education-container">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Education Icon" class="education-icon">
+                    <p class="education-text">Meru University of Science and Technology</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="--section-index: 8;">
+        <h2><i class="fa-solid fa-envelope"></i> Contact Me</h2>
+        <img src="images/contact1.gif" alt="Contact Cartoon" class="tech-cartoon" loading="lazy">
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <a href="https://drive.google.com/uc?export=download&id=1RftdwAuUzYzIOyxyt3CYbF07DsCDOqTa" class="download-btn" download>📄 Download Resume</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Vallarie Wakhula. Powered by Innovation.</p>
+        <p>"Data is my canvas, and innovation is my brush."</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Slideshow Functionality
+        const slides = document.querySelector('.slides');
+        const controlButtons = document.querySelectorAll('.control-btn');
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        function updateSlide() {
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            controlButtons.forEach(btn => btn.classList.remove('active'));
+            controlButtons[currentSlide].classList.add('active');
+        }
+
+        controlButtons.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlide();
+            });
+        });
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }, 5000);
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const contactData = { name, email, message, date: new Date().toISOString() };
+            let contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+            contacts.push(contactData);
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            contactForm.reset();
+            alert('Message saved! Check console.');
+            console.log('Contacts:', contacts);
+        });
+
+        // Load Progress Bars
+        window.onload = () => {
+            document.querySelectorAll('.progress').forEach(bar => bar.style.width = bar.style.width);
+            updateSlide();
+        };
+    </script>
+</body>
+</html>

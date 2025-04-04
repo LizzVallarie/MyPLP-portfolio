@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vallarie Wakhula - Data & ML Innovator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { 
+            background: #E5E5E5; 
+            color: #3C096C; 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+
+        /* Slideshow Header */
+        header {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: #3C096C;
+        }
+        .slideshow {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.8s ease;
+        }
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            opacity: 0;
+            animation: fadeInSlide 1s ease forwards;
+        }
+        .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1620121478247-ec408b91b680?q=80&w=2070&auto=format&fit=crop'); }
+        .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1526374965328-50dd35795525?q=80&w=2070&auto=format&fit=crop'); }
+        .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop'); }
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .slide-content {
+            text-align: center;
+            color: #E5E5E5;
+            padding: 40px;
+            background: rgba(60, 9, 108, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 700px;
+            position: relative;
+        }
+        .slide-content h1 { 
+            font-size: 3rem; 
+            font-weight: 700; 
+            margin-bottom: 20px; 
+            animation: bounceIn 1s ease; 
+        }
+        .slide-content p { 
+            font-size: 1.2rem; 
+            font-weight: 300; 
+            color: #FF8500; 
+            animation: fadeInUp 1s ease 0.5s forwards; 
+            opacity: 0; 
+        }
+        .slide-content a { 
+            display: inline-block; 
+            margin-top: 20px; 
+            padding: 10px 20px; 
+            background: #00F5D4; 
+            color: #3C096C; 
+            text-decoration: none; 
+            border-radius: 10px; 
+            transition: background 0.3s ease; 
+        }
+        .slide-content a:hover { background: #FF8500; color: #E5E5E5; }
+        .cartoon-hand { 
+            position: absolute; 
+            bottom: 20px; 
+            right: 20px; 
+            height: 100px; 
+        }
+
+        /* Slideshow Controls */
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        .control-btn {
+            width: 15px;
+            height: 15px;
+            background: #E5E5E5;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .control-btn.active { background: #FF8500; }
+
+        /* Circular Navigation */
+        nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+        nav a {
+            width: 50px;
+            height: 50px;
+            background: #3C096C;
+            color: #00F5D4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            animation: bounceInNav 0.5s ease forwards;
+            animation-delay: calc(0.1s * var(--i));
+        }
+        nav a:nth-child(1) { --i: 1; }
+        nav a:nth-child(2) { --i: 2; }
+        nav a:nth-child(3) { --i: 3; }
+        nav a:nth-child(4) { --i: 4; }
+        nav a:nth-child(5) { --i: 5; }
+        nav a:nth-child(6) { --i: 6; }
+        nav a:nth-child(7) { --i: 7; }
+        @keyframes bounceInNav {
+            0% { opacity: 0; transform: scale(0); }
+            60% { transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        nav a:hover { 
+            background: #FF8500; 
+            color: #3C096C; 
+            transform: scale(1.2); 
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 40px;
+            background: #E5E5E5;
+            position: relative;
+        }
+        h2 { 
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            color: #3C096C; 
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+        h2 i { 
+            color: #FF8500; 
+            margin-right: 15px; 
+        }
+        .content-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+            opacity: 0; 
+            animation: staggerFadeIn 1s ease forwards; 
+        }
+        @keyframes staggerFadeIn {
+            to { opacity: 1; }
+        }
+        .content-grid > div { 
+            background: #fff; 
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
+            transition: transform 0.3s ease; 
+            animation-delay: calc(0.2s * var(--i)); 
+        }
+        .content-grid > div:hover { 
+            transform: translateY(-10px); 
+        }
+        .skills-img { 
+            width: 100%; 
+            max-width: 300px; 
+            border-radius: 10px; 
+            margin-top: 20px; 
+        }
+        .icon { 
+            width: 30px; 
+            height: 30px; 
+            vertical-align: middle; 
+            margin-right: 10px; 
+        }
+        .tech-cartoon { 
+            display: block; 
+            margin: 20px auto; 
+            max-width: 300px; 
+            border-radius: 10px; 
+        }
+
+        /* Skills Progress Bars */
+        .progress-bar { 
+            width: 100%; 
+            background: #E5E5E5; 
+            height: 10px; 
+            border-radius: 5px; 
+            margin-top: 10px; 
+            overflow: hidden; 
+        }
+        .progress { 
+            height: 100%; 
+            background: #00F5D4; 
+            width: 0; 
+            transition: width 1.5s ease; 
+        }
+
+        /* Contact Form */
+        #contact form { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+        #contact input, #contact textarea { 
+            padding: 15px; 
+            border: 2px solid #3C096C; 
+            border-radius: 10px; 
+            font-size: 1rem; 
+            background: #fff; 
+            transition: border-color 0.3s ease; 
+        }
+        #contact input:focus, #contact textarea:focus { 
+            border-color: #FF8500; 
+            outline: none; 
+        }
+        #contact button { 
+            padding: 15px; 
+            background: #3C096C; 
+            color: #E5E5E5; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 1.1rem; 
+            font-weight: 500; 
+            cursor: pointer; 
+            transition: background 0.3s ease, transform 0.3s ease; 
+        }
+        #contact button:hover { 
+            background: #FF8500; 
+            transform: scale(1.05); 
+        }
+        #contact .resume-link { 
+            display: inline-block; 
+            margin-top: 20px; 
+            padding: 10px 20px; 
+            background: #00F5D4; 
+            color: #3C096C; 
+            text-decoration: none; 
+            border-radius: 10px; 
+            transition: background 0.3s ease; 
+        }
+        #contact .resume-link:hover { background: #FF8500; color: #E5E5E5; }
+
+        /* Footer */
+        footer { 
+            background: #3C096C; 
+            color: #E5E5E5; 
+            text-align: center; 
+            padding: 20px; 
+            font-size: 0.9rem; 
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            header p { font-size: 1rem; }
+            section { padding: 60px 20px; }
+            nav { bottom: 10px; right: 10px; }
+            nav a { width: 40px; height: 40px; font-size: 1.2rem; }
+            .slide-content { padding: 20px; }
+            .cartoon-hand { height: 80px; }
+            .tech-cartoon { max-width: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slideshow Header -->
+    <header>
+        <div class="slideshow">
+            <div class="slides">
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1>Welcome</h1>
+                        <p>I'm Vallarie Wakhula, a Data & ML Innovator</p>
+                        <img src="https://media.giphy.com/media/xT5LMWNOjGqJzzFNhK/giphy.gif" 
+                             alt="Smiling Impressive Cartoon" class="cartoon-hand">
+                        <!-- New smiling cartoon GIF from Giphy -->
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1>Skills</h1>
+                        <p>Expertise in Data Analytics & Machine Learning</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="slide-content">
+                        <h1>Connect</h1>
+                        <p>Let’s collaborate on innovative projects!</p>
+                        <a href="#contact">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <button class="control-btn active" data-slide="0"></button>
+                <button class="control-btn" data-slide="1"></button>
+                <button class="control-btn" data-slide="2"></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#about"><i class="fa-solid fa-user-astronaut"></i></a>
+        <a href="#skills"><i class="fa-solid fa-gears"></i></a>
+        <a href="#interests"><i class="fa-solid fa-star"></i></a>
+        <a href="#portfolio"><i class="fa-solid fa-rocket"></i></a>
+        <a href="#experience"><i class="fa-solid fa-briefcase"></i></a>
+        <a href="#projects"><i class="fa-solid fa-code"></i></a>
+        <a href="#education"><i class="fa-solid fa-graduation-cap"></i></a>
+        <a href="#contact"><i class="fa-solid fa-envelope"></i></a>
+    </nav>
+
+    <!-- About -->
+    <section id="about">
+        <h2><i class="fa-solid fa-user-astronaut"></i> About Me</h2>
+        <div class="content-grid">
+            <div style="--i: 1;">
+                <p>I'm a passionate data analyst and machine learning expert focused on turning data into actionable insights.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+        <h2><i class="fa-solid fa-gears"></i> Skills</h2>
+        <img src="images/Skills.gif" 
+             alt="Tech Space Cartoon on Desktop" class="tech-cartoon">
+        <!-- New tech-themed cartoon GIF from Giphy, placed below the heading -->
+        <div class="content-grid">
+            <div style="--i: 1;">
+                <h3>Data Analytics</h3>
+                <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+            </div>
+            <div style="--i: 2;">
+                <h3>Machine Learning</h3>
+                <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+            </div>
+            <div style="--i: 3;">
+                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e5250?ixlib=rb-4.0.3&auto=format&fit=crop&w=300" 
+                     alt="Woman Performing Analytics" class="skills-img">
+                <!-- Replace with an image of a woman with a masked face -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests -->
+    <section id="interests">
+        ima
+        <h2><i class="fa-solid fa-star"></i> Interests</h2>
+        <div class="content-grid">
+            <div style="--i: 1;"><p>Data Analytics</p></div>
+            <div style="--i: 2;"><p>Machine Learning</p></div>
+            <div style="--i: 3;"><p>Data Visualization</p></div>
+            <div style="--i: 4;"><p>Model Training</p></div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio">
+        <h2><i class="fa-solid fa-rocket"></i> Portfolio</h2>
+        <div class="content-grid">
+            <div style="--i: 1;">
+                <img src="https://via.placeholder.com/30?text=PLP" alt="PLP Icon" class="icon">
+                <h3>Data Analytics</h3>
+                <p>Extracted insights from large datasets using statistical methods.</p>
+            </div>
+            <div style="--i: 2;">
+                <img src="https://via.placeholder.com/30?text=Emobilis" alt="Emobilis Icon" class="icon">
+                <h3>Web Development</h3>
+                <p>Built responsive websites with HTML, CSS, and JavaScript.</p>
+            </div>
+            <div style="--i: 3;">
+                <img src="https://via.placeholder.com/30?text=IBM" alt="IBM Icon" class="icon">
+                <h3>Data Analytics</h3>
+                <p>Processed data using IBM Watson and SPSS.</p>
+            </div>
+            <div style="--i: 4;">
+                <img src="https://via.placeholder.com/30?text=Cisco" alt="Cisco Icon" class="icon">
+                <h3>Data Analytics</h3>
+                <p>Analyzed network performance metrics.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+        <h2><i class="fa-solid fa-briefcase"></i> Experience</h2>
+        <div class="content-grid">
+            <div style="--i: 1;"><p>Data Cleaning: Preprocessed raw datasets for analysis.</p></div>
+            <div style="--i: 2;"><p>Data Visualization: Created dashboards with Tableau.</p></div>
+            <div style="--i: 3;"><p>Model Feeding: Prepared data for machine learning models.</p></div>
+            <div style="--i: 4;"><p>Model Training: Trained ML models using Python.</p></div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <h2><i class="fa-solid fa-code"></i> Projects</h2>
+        <div class="content-grid">
+            <div style="--i: 1;">
+                <img src="https://via.placeholder.com/30?text=Python" alt="Python Icon" class="icon">
+                <p>Analytical Project: Used Python and SQL to analyze sales data.</p>
+            </div>
+            <div style="--i: 2;">
+                <img src="https://via.placeholder.com/30?text=ML" alt="ML Icon" class="icon">
+                <p>ML Training Project: Trained a regression model for predictions.</p>
+            </div>
+            <div style="--i: 3;">
+                <img src="https://via.placeholder.com/30?text=ML" alt="ML Icon" class="icon">
+                <p>ML Feeding Project: Optimized data pipelines for ML models.</p>
+            </div>
+            <div style="--i: 4;">
+                <img src="https://via.placeholder.com/30?text=Analytics" alt="Analytics Icon" class="icon">
+                <p>Data Analytics Project: Built an interactive dashboard with real-time data.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+        <h2><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+        <div class="content-grid">
+            <div style="--i: 1;"><p>Meru University of Science and Technology</p></div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2><i class="fa-solid fa-envelope"></i> Contact Me</h2>
+        
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <a href="resume.pdf" class="resume-link" download>Download Resume</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Vallarie Wakhula. Powered by Innovation.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Slideshow Functionality
+        const slides = document.querySelector('.slides');
+        const controlButtons = document.querySelectorAll('.control-btn');
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        function updateSlide() {
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            controlButtons.forEach(btn => btn.classList.remove('active'));
+            controlButtons[currentSlide].classList.add('active');
+        }
+
+        controlButtons.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlide();
+            });
+        });
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }, 5000);
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const contactData = { name, email, message, date: new Date().toISOString() };
+            let contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+            contacts.push(contactData);
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            contactForm.reset();
+            alert('Message saved! Check console.');
+            console.log('Contacts:', contacts);
+        });
+
+        // Load Progress Bars
+        window.onload = () => {
+            document.querySelectorAll('.progress').forEach(bar => bar.style.width = bar.style.width);
+            updateSlide();
+        };
+    </script>
+</body>
+</html>
